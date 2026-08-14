@@ -1,0 +1,37 @@
+APTX4869 安装说明
+
+一、手机端
+
+安装文件：APTX4869-Phone-v1.0.0.apk
+
+可直接在手机上打开 APK 安装，也可以使用：
+
+adb -s SERIAL install -r "APTX4869-Phone-v1.0.0.apk"
+
+其中 SERIAL 替换为 adb devices 显示的手机序列号。
+
+二、OPPO Watch X2（OWW251）手表端
+
+安装文件：APTX4869-Watch-OWW251-v1.0.0.apk
+
+先安装：
+
+adb -s SERIAL install -r "APTX4869-Watch-OWW251-v1.0.0.apk"
+
+再授予按键接管所需权限：
+
+adb -s SERIAL shell pm grant com.aptx4869.toycontroller.watch android.permission.WRITE_SECURE_SETTINGS
+adb -s SERIAL shell appops set com.aptx4869.toycontroller.watch android:write_settings allow
+
+其中 SERIAL 替换为 adb devices 显示的手表序列号。卸载后重新安装时，需要再次执行授权命令。
+
+三、工程压缩包
+
+APTX4869-Phone-Project-v1.0.0.zip：手机端完整源码工程。
+APTX4869-Watch-Project-v1.0.0.zip：手表端完整源码工程。
+
+压缩包已排除 build、.gradle、.idea、local.properties、诊断文件和测试截图等生成文件或本机配置。首次打开工程后，由 Gradle 自动重新生成这些内容。
+
+四、说明
+
+两个 APK 均为当前可安装的调试签名构建。BLE 控制仅写入已确认的 0xDDD1 控制特征，不包含固件升级操作。
